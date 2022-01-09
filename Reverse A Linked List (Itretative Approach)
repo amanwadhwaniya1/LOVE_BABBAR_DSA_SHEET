@@ -1,0 +1,94 @@
+package com.library;
+
+public class tut {
+
+    Node head;
+    Node tail = null;
+
+    class Node {
+        int data;
+        Node next;
+
+        Node(int n) {
+            data = n;
+            next = null;
+        }
+    }
+
+    public void push(int n) {
+        Node new_node = new Node(n);
+
+        if (head == null) {
+            head = new_node;
+            tail = head;
+        } else {
+            while (tail.next != null) {
+                tail = tail.next;
+            }
+            tail.next = new_node;
+            tail = new_node;
+        }
+    }
+
+    public void print()
+    {
+        if(head == null)
+            System.out.println("List Is Empty");
+        else
+        {
+            Node temp = head;
+
+            while(temp.next!=null)
+            {
+                System.out.print(temp.data + "->");
+                temp = temp.next;
+            }
+            System.out.println(temp.data);
+        }
+    }
+
+    public void reverse_list()
+    {
+        Node t3 = new Node(-1);
+        Node t1 = null,t2;
+        t3.next = head.next.next;
+        while(t3.next!=null)
+        {
+            if (t1 == null) {
+                t1 = head;
+                t2 = t1.next;
+                t3.next = t2.next;
+                t2.next = t1;
+                t1.next = null;
+                head = t2;
+            }
+            else
+            {
+                t1 = head;
+                t2 = t3.next;
+                t3.next = t2.next;
+                t2.next = t1;
+                head = t2;
+            }
+        }
+
+    }
+
+    public static void main(String... args) {
+        tut list = new tut();
+
+        list.push(10);
+        list.push(20);
+        list.push(30);
+        list.push(35);
+        list.push(40);
+        list.push(50);
+        list.print();
+
+        list.reverse_list();
+        list.print();
+
+    }
+
+
+}
